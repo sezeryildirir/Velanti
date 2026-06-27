@@ -445,15 +445,29 @@
     return true;
   }
 
-  nextBtn.addEventListener('click', ()=>{
+  nextBtn.addEventListener('click', async ()=>{
     if(step===0) data.model = document.getElementById('model').value.trim();
     if(step===1) data.budget = document.getElementById('budget').value;
     if(!valid(step)){ document.getElementById('e'+step).classList.add('show'); return; }
     document.getElementById('e'+step).classList.remove('show');
     if(step===total-1){
-      // Lead captured. Next step: wire this to email / Google Sheet / CRM.
-      console.log('VELANTI lead:', data);
-      show('done');
+      nextBtn.disabled = true;
+      nextBtn.textContent = 'Sending…';
+      try{
+        const res = await fetch('/api/lead', {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify(data)
+        });
+        if(!res.ok) throw new Error('request failed');
+        show('done');
+      }catch(err){
+        nextBtn.disabled = false;
+        nextBtn.textContent = 'Get my quote';
+        const e = document.getElementById('e3');
+        e.textContent = 'Something went wrong sending your request. Please try again, or call us.';
+        e.classList.add('show');
+      }
     } else { step++; show(step); }
   });
 
