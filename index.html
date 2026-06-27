@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VELANTI Motors — Luxury &amp; exotic car concierge in Los Angeles</title>
+<meta name="description" content="Tell us the luxury or exotic car you want. VELANTI sources it from our California dealer network, negotiates the price, and brings you the best offer — usually within 24 hours.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15110D; --panel:#1C1712; --panel2:#221C16;
+    --line:rgba(194,162,76,.20); --line2:rgba(194,162,76,.45);
+    --gold:#C2A24C; --gold-bright:#D8BC74;
+    --ivory:#F4F1EA; --muted:#B9AE96; --dim:#8A8270;
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --sans:'Inter',system-ui,sans-serif;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--ink);color:var(--ivory);font-family:var(--sans);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .eyebrow{font-family:var(--sans);font-size:.72rem;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.08;letter-spacing:.01em}
+  .muted{color:var(--muted)}
+  :focus-visible{outline:2px solid var(--gold-bright);outline-offset:3px;border-radius:2px}
+
+  /* header */
+  header{position:sticky;top:0;z-index:50;background:rgba(21,17,13,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{font-family:var(--serif);font-size:1.5rem;font-weight:600;letter-spacing:.22em;color:var(--ivory)}
+  .brand span{color:var(--gold)}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--sans);font-weight:500;font-size:.92rem;letter-spacing:.02em;border-radius:2px;cursor:pointer;border:1px solid transparent;transition:.18s ease;padding:.7rem 1.3rem}
+  .btn-gold{background:var(--gold);color:#15110D}
+  .btn-gold:hover{background:var(--gold-bright)}
+  .btn-ghost{background:transparent;color:var(--ivory);border-color:var(--line2)}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold-bright)}
+  .nav .btn{padding:.55rem 1.1rem}
+
+  /* apex divider signature */
+  .apex{display:flex;align-items:center;justify-content:center;gap:0;margin:0 auto}
+  .apex i{display:block;height:1px;width:64px;background:var(--line2)}
+  .apex svg{width:18px;height:12px;margin:0 6px}
+
+  /* hero */
+  .hero{padding:84px 0 64px;position:relative;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .hero h1{font-size:clamp(2.7rem,5.4vw,4.4rem);margin:18px 0 22px}
+  .hero h1 em{font-style:italic;color:var(--gold-bright)}
+  .hero p.lead{font-size:1.12rem;color:var(--muted);max-width:34ch;margin-bottom:30px}
+  .hero-cta{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+  .nofee{margin-top:22px;font-size:.86rem;color:var(--dim);display:flex;align-items:center;gap:8px}
+  .nofee svg{flex:none}
+
+  /* form card */
+  .card{background:var(--panel);border:1px solid var(--line2);border-radius:4px;padding:28px}
+  .card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+  .card-head h3{font-size:1.5rem}
+  .steps{display:flex;gap:7px;margin:18px 0 24px}
+  .seg{flex:1;height:3px;background:var(--line);border-radius:2px;overflow:hidden}
+  .seg b{display:block;height:100%;width:0;background:var(--gold);transition:width .35s ease}
+  .seg.done b,.seg.active b{width:100%}
+  .qstep{display:none;animation:fade .35s ease}
+  .qstep.on{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .qlabel{font-family:var(--serif);font-size:1.32rem;font-weight:600;margin-bottom:4px}
+  .qhint{font-size:.86rem;color:var(--dim);margin-bottom:16px}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+  .opt{border:1px solid var(--line2);border-radius:3px;padding:13px 14px;cursor:pointer;font-size:.94rem;color:var(--ivory);transition:.15s;background:transparent;text-align:left;line-height:1.3}
+  .opt:hover{border-color:var(--gold)}
+  .opt.sel{border-color:var(--gold);background:rgba(194,162,76,.10);color:var(--gold-bright)}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:.8rem;letter-spacing:.04em;color:var(--muted);margin-bottom:6px;text-transform:uppercase}
+  .field input,.field select{width:100%;background:var(--panel2);border:1px solid var(--line2);border-radius:3px;color:var(--ivory);font-family:var(--sans);font-size:.98rem;padding:12px 13px}
+  .field input::placeholder{color:var(--dim)}
+  .field input:focus,.field select:focus{border-color:var(--gold);outline:none}
+  .err{color:#E0A05A;font-size:.82rem;margin-top:6px;display:none}
+  .err.show{display:block}
+  .nav-row{display:flex;align-items:center;justify-content:space-between;margin-top:20px;gap:12px}
+  .back{background:none;border:none;color:var(--muted);cursor:pointer;font-family:var(--sans);font-size:.9rem;padding:.6rem .2rem}
+  .back:hover{color:var(--gold-bright)}
+  .back[hidden]{visibility:hidden}
+  .success{text-align:center;padding:18px 6px}
+  .success .mark{width:54px;height:54px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+  .success h3{font-size:1.7rem;margin-bottom:8px}
+  .success p{color:var(--muted);font-size:.98rem}
+
+  /* generic section */
+  section.band{padding:88px 0;border-top:1px solid var(--line)}
+  .sec-head{text-align:center;max-width:60ch;margin:0 auto 52px}
+  .sec-head h2{font-size:clamp(2rem,3.6vw,2.9rem);margin:14px 0 12px}
+  .sec-head p{color:var(--muted)}
+
+  /* how it works */
+  .steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line)}
+  .stepc{background:var(--ink);padding:30px 24px}
+  .stepc .n{font-family:var(--serif);font-size:1.1rem;color:var(--gold);letter-spacing:.1em}
+  .stepc h3{font-size:1.32rem;margin:14px 0 10px}
+  .stepc p{font-size:.92rem;color:var(--muted)}
+
+  /* source grid */
+  .src-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .src{border:1px solid var(--line);border-radius:4px;padding:26px 22px;transition:.18s;background:var(--panel)}
+  .src:hover{border-color:var(--line2);transform:translateY(-3px)}
+  .src h3{font-size:1.55rem;margin-bottom:8px}
+  .src p{font-size:.88rem;color:var(--muted)}
+
+  /* trust */
+  .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
+  .pill{display:flex;flex-direction:column;gap:10px}
+  .pill .ch{color:var(--gold)}
+  .pill h3{font-size:1.18rem}
+  .pill p{font-size:.88rem;color:var(--muted)}
+
+  /* lease vs finance */
+  .lf{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:880px;margin:0 auto}
+  .lf-col{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:30px}
+  .lf-col h3{font-size:1.6rem;margin-bottom:14px}
+  .lf-col ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+  .lf-col li{font-size:.92rem;color:var(--muted);padding-left:22px;position:relative}
+  .lf-col li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;border-right:1px solid var(--gold);border-top:1px solid var(--gold);transform:rotate(45deg)}
+  .lf-note{text-align:center;margin-top:26px;color:var(--dim);font-size:.9rem}
+
+  /* final cta */
+  .final{text-align:center;padding:96px 0}
+  .final h2{font-size:clamp(2.2rem,4.2vw,3.4rem);margin:16px auto 18px;max-width:18ch}
+  .final p{color:var(--muted);max-width:46ch;margin:0 auto 30px}
+
+  footer{border-top:1px solid var(--line);padding:46px 0 38px}
+  .foot{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap}
+  .foot .brand{font-size:1.25rem}
+  .foot p{font-size:.82rem;color:var(--dim);max-width:48ch;margin-top:10px}
+  .legal{font-size:.76rem;color:var(--dim);margin-top:22px;border-top:1px solid var(--line);padding-top:20px;line-height:1.6}
+
+  @media(max-width:880px){
+    .hero-grid{grid-template-columns:1fr;gap:38px}
+    .hero{padding:54px 0 44px}
+    .hero p.lead{max-width:none}
+    .steps-grid{grid-template-columns:1fr 1fr}
+    .src-grid{grid-template-columns:1fr}
+    .trust-grid{grid-template-columns:1fr 1fr;gap:24px}
+    .lf{grid-template-columns:1fr}
+    .nav .btn-ghost{display:none}
+  }
+  @media(max-width:520px){
+    .opts{grid-template-columns:1fr}
+    .steps-grid{grid-template-columns:1fr}
+    .trust-grid{grid-template-columns:1fr}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">VELANTI <span>·</span></div>
+    <a href="#request" class="btn btn-gold">Start my request</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Los Angeles · Luxury &amp; exotic</div>
+      <h1>Tell us the car.<br>We bring you the <em>best deal.</em></h1>
+      <p class="lead">VELANTI is your private car concierge in LA. Share what you're after — we source it from our California dealer network, negotiate the price, and hand you the best offer, usually within 24 hours.</p>
+      <div class="hero-cta">
+        <a href="#request" class="btn btn-gold">Start my request</a>
+        <a href="#how" class="btn btn-ghost">How it works</a>
+      </div>
+      <div class="nofee">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="#C2A24C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        No fee to you. We're paid by the dealer, not you.
+      </div>
+    </div>
+
+    <div class="card" id="request">
+      <div class="card-head">
+        <h3>Find your car</h3>
+        <span class="muted" style="font-size:.82rem" id="stepCount">Step 1 of 4</span>
+      </div>
+      <div class="steps" id="bars">
+        <div class="seg"><b></b></div><div class="seg"><b></b></div><div class="seg"><b></b></div><div class="seg"><b></b></div>
+      </div>
+
+      <form id="leadForm" novalidate>
+        <!-- step 1 -->
+        <div class="qstep on" data-step="0">
+          <div class="qlabel">What are you looking for?</div>
+          <div class="qhint">Pick a category — or tell us the exact model.</div>
+          <div class="opts" data-group="category">
+            <button type="button" class="opt">Exotic / supercar</button>
+            <button type="button" class="opt">Luxury sedan</button>
+            <button type="button" class="opt">Premium SUV</button>
+            <button type="button" class="opt">Convertible</button>
+            <button type="button" class="opt">Performance</button>
+            <button type="button" class="opt">Not sure yet</button>
+          </div>
+          <div class="field">
+            <label for="model">Specific make or model (optional)</label>
+            <input id="model" type="text" placeholder="e.g. Porsche 911, Range Rover, Lamborghini Urus">
+          </div>
+          <div class="err" id="e0">Choose a category to continue.</div>
+        </div>
+
+        <!-- step 2 -->
+        <div class="qstep" data-step="1">
+          <div class="qlabel">How would you like to pay?</div>
+          <div class="qhint">We arrange all three with our dealer partners.</div>
+          <div class="opts" data-group="payment">
+            <button type="button" class="opt">Finance</button>
+            <button type="button" class="opt">Lease</button>
+            <button type="button" class="opt">Cash</button>
+            <button type="button" class="opt">Not sure yet</button>
+          </div>
+          <div class="field">
+            <label for="budget">Target budget</label>
+            <select id="budget">
+              <option value="">Select a range</option>
+              <option>Under $50k</option>
+              <option>$50k – $100k</option>
+              <option>$100k – $200k</option>
+              <option>$200k – $400k</option>
+              <option>$400k+</option>
+            </select>
+          </div>
+          <div class="err" id="e1">Pick how you'd like to pay.</div>
+        </div>
+
+        <!-- step 3 -->
+        <div class="qstep" data-step="2">
+          <div class="qlabel">A couple of details</div>
+          <div class="qhint">This helps us match you with the right financing offers.</div>
+          <div class="field">
+            <label>Credit score range</label>
+            <div class="opts" data-group="credit">
+              <button type="button" class="opt">Excellent · 720+</button>
+              <button type="button" class="opt">Good · 660–719</button>
+              <button type="button" class="opt">Fair · 600–659</button>
+              <button type="button" class="opt">Building · under 600</button>
+            </div>
+          </div>
+          <div class="field">
+            <label>Do you have a trade-in?</label>
+            <div class="opts" data-group="trade" style="grid-template-columns:1fr 1fr">
+              <button type="button" class="opt">Yes</button>
+              <button type="button" class="opt">No</button>
+            </div>
+          </div>
+          <div class="err" id="e2">Select a credit range to continue.</div>
+        </div>
+
+        <!-- step 4 -->
+        <div class="qstep" data-step="3">
+          <div class="qlabel">Where should we send your options?</div>
+          <div class="qhint">We'll reach out within 24 hours with real pricing.</div>
+          <div class="field">
+            <label for="name">Full name</label>
+            <input id="name" type="text" placeholder="Your name">
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="you@email.com">
+          </div>
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input id="phone" type="tel" placeholder="(555) 555-5555">
+          </div>
+          <div class="err" id="e3">Add your name, a valid email, and a phone number.</div>
+        </div>
+
+        <!-- success -->
+        <div class="qstep" data-step="done">
+          <div class="success">
+            <div class="mark">
+              <svg width="22" height="22" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="#C2A24C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Request received</h3>
+            <p>Thank you — a VELANTI specialist will reach out within 24 hours with options and pricing on the exact car you want.</p>
+          </div>
+        </div>
+
+        <div class="nav-row" id="navRow">
+          <button type="button" class="back" id="backBtn" hidden>← Back</button>
+          <button type="button" class="btn btn-gold" id="nextBtn" style="margin-left:auto">Continue</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">How it works</div>
+      <h2>From wish list to keys, handled for you</h2>
+      <p>You stay out of the dealership grind. We do the sourcing, the negotiating, and the paperwork.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="stepc"><div class="n">01</div><h3>Tell us the car</h3><p>A dream model or just a category. Specific or open — we take it from there.</p></div>
+      <div class="stepc"><div class="n">02</div><h3>We source &amp; negotiate</h3><p>We tap our network of licensed California dealers and push for the best price.</p></div>
+      <div class="stepc"><div class="n">03</div><h3>Your best offer in 24h</h3><p>Real pricing on the exact car, color, and options you want. No lot-walking.</p></div>
+      <div class="stepc"><div class="n">04</div><h3>Drive it home</h3><p>Pick the offer you like. We line up the paperwork and you take the keys.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">What we can source</div>
+      <h2>Access beyond the showroom floor</h2>
+      <p>Through our dealer relationships across California, we reach inventory most buyers never see.</p>
+    </div>
+    <div class="src-grid">
+      <div class="src"><h3>Exotics &amp; supercars</h3><p>Limited allocations and hard-to-find performance machines.</p></div>
+      <div class="src"><h3>Luxury sedans</h3><p>Flagship saloons configured exactly to your spec.</p></div>
+      <div class="src"><h3>Premium SUVs</h3><p>The most requested luxury SUVs, sourced at the best price.</p></div>
+      <div class="src"><h3>Convertibles &amp; roadsters</h3><p>Open-top luxury for the California coast.</p></div>
+      <div class="src"><h3>Performance &amp; track</h3><p>Driver-focused builds and track-ready editions.</p></div>
+      <div class="src"><h3>Collector &amp; classic</h3><p>Curated access to investment-grade vehicles.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="trust-grid">
+      <div class="pill"><span class="ch">»</span><h3>No buyer fee</h3><p>Our service is free to you. We're compensated by the dealer.</p></div>
+      <div class="pill"><span class="ch">»</span><h3>Statewide network</h3><p>Access to licensed dealer inventory across California.</p></div>
+      <div class="pill"><span class="ch">»</span><h3>Lease, finance, or cash</h3><p>We arrange the structure that fits your situation.</p></div>
+      <div class="pill"><span class="ch">»</span><h3>Concierge end to end</h3><p>From first search to signed paperwork, one point of contact.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Lease vs finance</div>
+      <h2>Two paths to the same car</h2>
+      <p>Not sure which fits you? Here's the short version — we'll walk you through the full math on your request.</p>
+    </div>
+    <div class="lf">
+      <div class="lf-col">
+        <h3>Lease</h3>
+        <ul>
+          <li>Lower monthly payments</li>
+          <li>Drive a new car every few years</li>
+          <li>Mileage limits and wear terms apply</li>
+          <li>Best if you like upgrading often</li>
+        </ul>
+      </div>
+      <div class="lf-col">
+        <h3>Finance</h3>
+        <ul>
+          <li>You own the car outright at the end</li>
+          <li>No mileage restrictions</li>
+          <li>Higher monthly payment, building equity</li>
+          <li>Best if you keep cars long term</li>
+        </ul>
+      </div>
+    </div>
+    <p class="lf-note">Want the full breakdown for your exact budget? Start a request and we'll model both.</p>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <div class="apex"><i></i><svg viewBox="0 0 18 12" fill="none"><path d="M2 10L9 3l7 7" stroke="#C2A24C" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg><i></i></div>
+    <h2>The car you want is one request away</h2>
+    <p>Tell us what you're after. We'll bring back the best deal in Los Angeles — without the dealership runaround.</p>
+    <a href="#request" class="btn btn-gold">Start my request</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <div class="brand">VELANTI <span style="color:var(--gold)">·</span></div>
+        <p>Luxury &amp; exotic car concierge. Los Angeles, California.</p>
+      </div>
+      <a href="#request" class="btn btn-ghost">Start my request</a>
+    </div>
+    <div class="legal">
+      VELANTI Motors is a vehicle concierge service that connects buyers with licensed dealer partners. We do not sell vehicles directly and do not collect purchase payments from buyers. © 2026 VELANTI Motors. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<script>
+  const data = {category:"",model:"",payment:"",budget:"",credit:"",trade:"",name:"",email:"",phone:""};
+  let step = 0;
+  const total = 4;
+  const steps = [...document.querySelectorAll('.qstep')];
+  const bars = [...document.querySelectorAll('#bars .seg')];
+  const nextBtn = document.getElementById('nextBtn');
+  const backBtn = document.getElementById('backBtn');
+  const stepCount = document.getElementById('stepCount');
+
+  document.querySelectorAll('.opts').forEach(group=>{
+    const key = group.dataset.group;
+    group.addEventListener('click', e=>{
+      const b = e.target.closest('.opt'); if(!b) return;
+      group.querySelectorAll('.opt').forEach(o=>o.classList.remove('sel'));
+      b.classList.add('sel');
+      data[key] = b.textContent.trim();
+      group.closest('.qstep').querySelector('.err')?.classList.remove('show');
+    });
+  });
+
+  function show(i){
+    steps.forEach(s=>s.classList.remove('on'));
+    if(i==='done'){
+      document.querySelector('[data-step="done"]').classList.add('on');
+      bars.forEach(b=>b.querySelector('b').style.width='100%');
+      document.getElementById('navRow').style.display='none';
+      stepCount.textContent='Done';
+      document.getElementById('request').scrollIntoView({block:'nearest'});
+      return;
+    }
+    steps[i].classList.add('on');
+    bars.forEach((b,idx)=>{ b.querySelector('b').style.width = idx<=i?'100%':'0'; });
+    stepCount.textContent = `Step ${i+1} of ${total}`;
+    backBtn.hidden = i===0;
+    nextBtn.textContent = i===total-1 ? 'Get my quote' : 'Continue';
+  }
+
+  function valid(i){
+    if(i===0) return !!data.category;
+    if(i===1) return !!data.payment;
+    if(i===2) return !!data.credit;
+    if(i===3){
+      data.name = document.getElementById('name').value.trim();
+      data.email = document.getElementById('email').value.trim();
+      data.phone = document.getElementById('phone').value.trim();
+      const okEmail = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.email);
+      return data.name && okEmail && data.phone.length>=7;
+    }
+    return true;
+  }
+
+  nextBtn.addEventListener('click', ()=>{
+    if(step===0) data.model = document.getElementById('model').value.trim();
+    if(step===1) data.budget = document.getElementById('budget').value;
+    if(!valid(step)){ document.getElementById('e'+step).classList.add('show'); return; }
+    document.getElementById('e'+step).classList.remove('show');
+    if(step===total-1){
+      // Lead captured. Next step: wire this to email / Google Sheet / CRM.
+      console.log('VELANTI lead:', data);
+      show('done');
+    } else { step++; show(step); }
+  });
+
+  backBtn.addEventListener('click', ()=>{ if(step>0){ step--; show(step); } });
+  show(0);
+</script>
+</body>
+</html>
